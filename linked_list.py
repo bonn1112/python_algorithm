@@ -29,7 +29,13 @@ class LinkedList:
 
     def remove(self, data: Any) -> None:
         current_node = self.head
-        if current_node ==
+        if current_node and current_node.data == data:
+            self.head = current_node.next
+            current_node = None
+            return
+
+        privious_node = None
+        while current_node and current_node.next != data:
 
     def print(self) -> None:
         current_node = self.head
