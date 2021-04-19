@@ -13,7 +13,7 @@ class HashTable(object):
 
     def add(self, key, value) -> None:
         index = self.hash(key)  # data 格納
-        for data in self.table[index]: # indexからlist取り出すlist=[data[0], data[1]]
+        for data in self.table[index]:  # indexからlist取り出すlist=[data[0], data[1]]
             if data[0] == key:
                 data[1] = value
                 break
@@ -21,13 +21,13 @@ class HashTable(object):
             self.table[index].append([key, value])
 
     def print(self) -> None:
-        for index in range(self.size): # view all index of table -> List
+        for index in range(self.size):  # view all index of table -> List
             print(index, end=' ')
-            for data in self.table[index]: # view all list[key, value] data in each index
+            for data in self.table[index]:  # view all list[key, value] data in each index
                 print('----->', end=' ')
                 print(data, end=' ')
 
-            print() # new line after view one index
+            print()  # new line after view one index
 
     def get(self, key) -> Any:
         index = self.hash(key)
@@ -38,13 +38,19 @@ class HashTable(object):
         else:
             return None
 
+    def __setitem__(self, key, value) -> None:  #################
+        self.add(key, value)
+
+    def __getitem__(self, key) -> Any:  #####################
+        return self.get(key)
+
 
 if __name__ == '__main__':
     hash_table = HashTable()
-    hash_table.add('car', 'Tesla')
-    hash_table.add('car', 'Tesla')
-    hash_table.add('car', 'Toyota')
-    hash_table.add('pc', 'Mac')
-    hash_table.add('sns', 'YouTube')
+    hash_table['car'] = 'Tesla'
+    hash_table['car'] = 'Tesla'
+    hash_table['car'] = 'Toyota'
+    hash_table['pc'] = 'Mac'
+    hash_table['sns'] = 'YouTube'
     hash_table.print()
     # print(hash_table.get('sns'))
