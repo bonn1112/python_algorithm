@@ -79,6 +79,20 @@ class DoubleLinkedList(object):
 
         self.head = previous_node
 
+    def reverse_recursive(self) -> None:
+        def _reverse_recursive(current_node: Node = None) -> Optional[None]:
+            prev_node = current_node.prev
+            current_node.prev = current_node.next
+            current_node.next = prev_node
+
+            if current_node.prev is None:
+                return current_node
+
+            return _reverse_recursive(current_node.prev)
+
+        self.head = _reverse_recursive(self.head)
+
+
     def print(self) -> None:
         current_node = self.head
         while current_node:
@@ -91,8 +105,11 @@ if __name__ == '__main__':
     d.append(1)
     d.append(2)
     d.append(3)
+    d.append(4)
+    d.append(5)
+    d.append(6)
     d.insert(0)
     d.print()
     print('###########################')
-    d.remove(2)
+    d.reverse_recursive()
     d.print()
